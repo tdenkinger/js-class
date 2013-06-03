@@ -5,12 +5,16 @@
     <script type="text/javascript">
       var name = 'Troy';
       function message(){
-        return "Howdy " + name + "!"
+        if (name === 'Troy'){
+          return "Howdy " + name + "!"
+        }else{
+          return 'who are you now?'
+        }
       }
 
       function sayHello(){
         alert(message());
-        name = 'Tex';
+        name = 'Blarf';
         alert(message());
       }
     </script>
