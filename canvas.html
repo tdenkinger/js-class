@@ -1,0 +1,60 @@
+<!doctype html> <html>
+  <head>
+    <title>Learning Javascript</title>
+    <script type="text/javascript">
+      var context;
+      function rectangle(color, x, y, width, height){
+        context.fillStyle = color;
+        context.fillRect(x, y, width, height);
+      }
+
+      function bar(x, y){
+        rectangle("rgb(64, 64, 128)", 0, x*12, y*10, 10);
+      }
+
+      function text(message, color, x, y){
+        context.fillStyle = color;
+        context.font = "30px sans-serif";
+        context.fillText(message, x, y);
+      }
+
+      function pie(progress, value){
+        context.beginPath();
+        context.fillStyle = "hsl("+(progress * 360)+", 80%, 60%)";
+        context.moveTo(150, 150);
+        context.arc(150, 150, 100, progress*2*Math.PI, (progress+value)*2*Math.PI);
+        context.fill();
+
+      }
+
+      function normalize_data(data){
+        var total = 0;
+        for (i in data ){
+          total += data[i];
+        }
+        var percentages = [];
+        for (i in data){
+          percentage = data[i]/total
+          percentages.push(percentage)
+        }
+        return percentages
+      }
+
+      function ready(){
+        var canvas = document.getElementById("drawing");
+        context = canvas.getContext("2d");
+        var data = normalize_data([5, 5, 5, 5, 5, 10])
+        var progress = 0;
+        for (i in data){
+          pie(progress, data[i]);
+          progress += data[i];
+        }
+        text("Mmmmm, pie", "green", 0, 30);
+      }
+    </script>
+  </head>
+  <body onload='ready()'>
+    <h1>Learning Javascript</h1>
+    <canvas id='drawing' width="600" height="400"></canvas>
+  </body>
+</html>
