@@ -3,12 +3,16 @@
   <head>
     <title>Learning Javascript</title>
     <script type="text/javascript">
+      function message(name){
+        return "Hello " + name + "!"
+      }
+
       function sayHello(){
-        confirm('hello joe!');
+        alert(message('Troy'));
       }
     </script>
   </head>
-  <body onload='sayHello(); sayHello()'>
+  <body onload='sayHello()'>
     <h1>Learning Javascript Today</h1>
     <p>I'm going to learn javascript!</p>
   </body>
