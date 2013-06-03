@@ -3,12 +3,15 @@
   <head>
     <title>Learning Javascript</title>
     <script type="text/javascript">
-      function message(name){
-        return "Yello " + name + "!"
+      var name = 'Troy';
+      function message(){
+        return "Howdy " + name + "!"
       }
 
       function sayHello(){
-        alert(message('Troy'));
+        alert(message());
+        name = 'Tex';
+        alert(message());
       }
     </script>
   </head>
