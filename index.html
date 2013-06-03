@@ -6,14 +6,16 @@
       var data = [4, 2, 9, 7];
       function ready(){
         for (i in data){
-          var number = data[i];
-          var message = "";
-          while (number > 0){
-            message += "|";
-            number--;
-          }
-          output(message);
+          output( get_message(data[i], data[i] + ": ") );
         }
+      }
+
+      function get_message(number, message){
+        while( number > 0){
+          message += "|";
+          number--;
+        }
+        return message;
       }
 
       function output(message){
