@@ -3,24 +3,26 @@
   <head>
     <title>Learning Javascript</title>
     <script type="text/javascript">
-      var name = 'Troy';
-      function message(){
-        if (name === 'Troy'){
-          return "Howdy " + name + "!"
-        }else{
-          return 'who are you now?'
+      var data = [4, 2, 9, 7];
+      function ready(){
+        for (i in data){
+          var number = data[i];
+          var message = "";
+          while (number > 0){
+            message += "|";
+            number--;
+          }
+          output(message);
         }
       }
 
-      function sayHello(){
-        alert(message());
-        name = 'Blarf';
-        alert(message());
+      function output(message){
+        document.getElementById('output').innerHTML += message + '<br>';
       }
     </script>
   </head>
-  <body onload='sayHello()'>
-    <h1>Learning Javascript Today</h1>
-    <p>I'm going to learn javascript!</p>
+  <body onload='ready()'>
+    <h1>Learning Javascript</h1>
+    <pre id='output'></pre>
   </body>
 </html>
