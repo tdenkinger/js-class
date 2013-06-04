@@ -1,0 +1,27 @@
+<!doctype html> <html>
+  <head>
+    <title>Learning Javascript</title>
+    <script type="text/javascript">
+      var Chart = function(context){
+        this.context = context;
+      }
+
+      Chart.prototype = {
+        rectangle: function(color, x, y, width, height){
+          this.context.fillStyle = color;
+          this.context.fillRect(x, y, width, height);
+        }   
+      }
+      
+      function ready(){
+        var context = document.getElementById('drawing').getContext('2d');
+        var chart = new Chart(context);
+        chart.rectangle('red', 0, 0, 300, 200);
+      }
+    </script>
+  </head>
+  <body onload='ready()'>
+    <h1>Learning Javascript</h1>
+    <canvas id='drawing' width="600" height="400"></canvas>
+  </body>
+</html>
