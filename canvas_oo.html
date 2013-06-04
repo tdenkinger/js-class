@@ -12,16 +12,56 @@
           this.context.fillRect(x, y, width, height);
         }   
       }
-      
+
+      var BarChart = function(context, data){
+        this.context = context;
+        this.data = data;
+      }
+
+      BarChart.prototype = {
+        rectangle: Chart.prototype.rectangle,
+        bar: function(x, y){
+          this.rectangle("rgb(64, 64, 128)", 0, x*12, y*10, 10);
+        },
+        draw: function() {
+          for (i in this.data){
+            this.bar(i, this.data[i]);
+          }
+        }
+      }
+
+      PieChart = function(context, data){
+        this.context = context;
+        this.data = data;
+      }
+
+      PieChart.prototype = {
+        slice: function(progress, value){
+          this.context.beginPath();
+          this.context.fillStyle = "hsl("+(progress * 360)+", 80%, 60%)";
+          this.context.moveTo(150, 150);
+          this.context.arc(150, 150, 100, progress*2*Math.PI, (progress+value)*2*Math.PI);
+          this.context.fill();
+        },
+        draw: function(){
+          var progress = 0;
+          for (i in this.data){
+            this.slice(progress, this.data[i]);
+            progress += this.data[i];
+          }
+        }
+      }
+
+
       function ready(){
         var context = document.getElementById('drawing').getContext('2d');
-        var chart = new Chart(context);
-        chart.rectangle('red', 0, 0, 300, 200);
+        var pieChart = new PieChart(context, [0.1, 0.2, 0.5, 0.2]);
+        pieChart.draw(); 
       }
     </script>
   </head>
   <body onload='ready()'>
     <h1>Learning Javascript</h1>
-    <canvas id='drawing' width="600" height="400"></canvas>
+    <canvas id='drawing' width="600" height="600"></canvas>
   </body>
 </html>
