@@ -8,13 +8,13 @@
         context.fillRect(x, y, width, height);
       }
 
-      function bar(x, y){
+      function bar(x, y, offset){
         rectangle("rgb(64, 64, 128)", 0, x*12, y*10, 10);
       }
 
-      function text(message, color, x, y){
+      function text(message, color, x, y, font){
         context.fillStyle = color;
-        context.font = "30px sans-serif";
+        context.font = font;
         context.fillText(message, x, y);
       }
 
@@ -24,7 +24,14 @@
         context.moveTo(150, 150);
         context.arc(150, 150, 100, progress*2*Math.PI, (progress+value)*2*Math.PI);
         context.fill();
+      }
 
+      function line(x, y){
+        context.strokeStyle = "hsl(30, 80%, 50%)";
+        context.lineWidth = 4;
+        context.lineTo(x*50, 100-y*10);
+        text(y, "black", x*48, 115-y*9, "12px sans-serif");
+        context.stroke();
       }
 
       function normalize_data(data){
@@ -43,13 +50,11 @@
       function ready(){
         var canvas = document.getElementById("drawing");
         context = canvas.getContext("2d");
-        var data = normalize_data([5, 5, 5, 5, 5, 10])
-        var progress = 0;
+        var data = [4, 7, 2, 4, 9]; 
         for (i in data){
-          pie(progress, data[i]);
-          progress += data[i];
+          line(i, data[i]);
         }
-        text("Mmmmm, pie", "green", 0, 30);
+        text("So much lines!", "green", 0, 150, "30px sans-serif");
       }
     </script>
   </head>
