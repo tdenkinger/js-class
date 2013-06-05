@@ -1,6 +1,5 @@
 $(function(){
 
-
   $('form#add_task').on('submit', function(event){
     event.preventDefault();
     var $ul = $("#tasks ul");
@@ -9,6 +8,10 @@ $(function(){
 
     $ul.prepend($li);
     $text_box.val(null);
+
+    $li.on('click', function(event){
+      $(this).toggleClass('completed');
+    });
   });
 
   function get_formatted_text(task_text){
