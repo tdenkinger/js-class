@@ -12,14 +12,12 @@ $.fn.tableOfContents = function(header){
   var ul = $("<ul id='toc'></ul>");
   toc_header.after(ul);
 
-
   this.find('h2').each( function(){
     var title = $(this).text();
-    var slug = title.trim().toLowerCase().replace(" ", "_");
+    var slug = get_slug(title);
     var list_item = "<li><a href='#" + slug + "'>" + title + "</a></li>";
-    var target_anchor = "<a name='" + slug + "'/>";
 
-    $(this).prepend(target_anchor);
+    $(this).prepend( get_target_anchor(slug) );
     ul.append(list_item);
 
     var toggle_link = $("<a href='#'>(hide)</a><br/>");
@@ -32,4 +30,12 @@ $.fn.tableOfContents = function(header){
     });
     $(this).after(toggle_link);
   });
+
+  function get_target_anchor(slug){
+    return "<a name='" + slug + "'/>";
+  };
+
+  function get_slug(title){
+    return title.trim().toLowerCase().replace(" ", "_");
+  };
 };
